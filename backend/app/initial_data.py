@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from .database import engine, Base, SessionLocal
 from .database_models import (
     Faceta, FacetaValor, Tecnica, TecnicaFacetaValor,
-    Questao, Resposta, RespostaFacetaValor
+    Questao, Resposta, RespostaFacetaValor, PONTUACAO_MEDIA, PONTUACAO_MAIOR, PONTUACAO_MENOR
 )
 
 
@@ -144,7 +144,7 @@ def create_initial_data(db: Session):
         ])
         db.commit()
 
-        # 4. ASSOCIAÇÃO TÉCNICA-FACETA (Exemplo: Brainstorming é Baixa Complexidade e Curto Tempo)
+        # 4. ASSOCIAÇÃO TÉCNICA-FACETA
 
         # T1 – Linguagem Natural
         tf1_1 = TecnicaFacetaValor(tecnica_id=tecnica_t1.id, faceta_valor_id=valor_faceta_f1_3.id)  # F1 (Informal)
@@ -156,7 +156,7 @@ def create_initial_data(db: Session):
         tf1_7 = TecnicaFacetaValor(tecnica_id=tecnica_t1.id, faceta_valor_id=valor_faceta_f7_1.id)  # F7 (Nenhum)
         tf1_8 = TecnicaFacetaValor(tecnica_id=tecnica_t1.id, faceta_valor_id=valor_faceta_f8_1.id)  # F8 (Geral)
         tf1_9 = TecnicaFacetaValor(tecnica_id=tecnica_t1.id, faceta_valor_id=valor_faceta_f9_1.id)  # F9 (Textual)
-        tf1_10 = TecnicaFacetaValor(tecnica_id=tecnica_t1.id, faceta_valor_id=valor_faceta_f10_1.id)  # F10 (Alta)
+        tf1_10 = TecnicaFacetaValor(tecnica_id=tecnica_t1.id, faceta_valor_id=valor_faceta_f10_3.id)  # F10 (Baixa)
         tf1_11 = TecnicaFacetaValor(tecnica_id=tecnica_t1.id, faceta_valor_id=valor_faceta_f11_1.id)  # F11 (Baixa)
         db.add_all([tf1_1, tf1_2, tf1_3, tf1_4, tf1_5, tf1_6, tf1_7, tf1_8, tf1_9, tf1_10, tf1_11])
         db.commit()
@@ -478,56 +478,56 @@ def create_initial_data(db: Session):
         db.add_all([resposta_q11_1, resposta_q11_2, resposta_q11_3])
         db.commit()
 
-        # 7. ASSOCIAÇÃO RESPOSTA-FACETA (Onde o seu algoritmo de interpretação entra)
+        # 7. ASSOCIAÇÃO RESPOSTA-FACETA
 
         # Q1 x F8
 
         rfv1 = RespostaFacetaValor(
             resposta_id=resposta_q1_1.id,
             faceta_valor_id=valor_faceta_f8_1.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv2 = RespostaFacetaValor(
             resposta_id=resposta_q1_2.id,
             faceta_valor_id=valor_faceta_f8_1.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv3 = RespostaFacetaValor(
             resposta_id=resposta_q1_3.id,
             faceta_valor_id=valor_faceta_f8_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
 
         rfv4 = RespostaFacetaValor(
             resposta_id=resposta_q1_1.id,
             faceta_valor_id=valor_faceta_f8_2.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv5 = RespostaFacetaValor(
             resposta_id=resposta_q1_2.id,
             faceta_valor_id=valor_faceta_f8_2.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv6 = RespostaFacetaValor(
             resposta_id=resposta_q1_3.id,
             faceta_valor_id=valor_faceta_f8_2.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
 
         rfv7 = RespostaFacetaValor(
             resposta_id=resposta_q1_1.id,
             faceta_valor_id=valor_faceta_f8_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv8 = RespostaFacetaValor(
             resposta_id=resposta_q1_2.id,
             faceta_valor_id=valor_faceta_f8_3.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv9 = RespostaFacetaValor(
             resposta_id=resposta_q1_3.id,
             faceta_valor_id=valor_faceta_f8_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         db.add_all([rfv1, rfv2, rfv3, rfv4, rfv5, rfv6, rfv7, rfv8, rfv9])
         db.commit()
@@ -537,49 +537,49 @@ def create_initial_data(db: Session):
         rfv10 = RespostaFacetaValor(
             resposta_id=resposta_q2_1.id,
             faceta_valor_id=valor_faceta_f1_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv11 = RespostaFacetaValor(
             resposta_id=resposta_q2_2.id,
             faceta_valor_id=valor_faceta_f1_1.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv12 = RespostaFacetaValor(
             resposta_id=resposta_q2_3.id,
             faceta_valor_id=valor_faceta_f1_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
 
         rfv13 = RespostaFacetaValor(
             resposta_id=resposta_q2_1.id,
             faceta_valor_id=valor_faceta_f1_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv14 = RespostaFacetaValor(
             resposta_id=resposta_q2_2.id,
             faceta_valor_id=valor_faceta_f1_2.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv15 = RespostaFacetaValor(
             resposta_id=resposta_q2_3.id,
             faceta_valor_id=valor_faceta_f1_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
 
         rfv16 = RespostaFacetaValor(
             resposta_id=resposta_q2_1.id,
             faceta_valor_id=valor_faceta_f1_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv17 = RespostaFacetaValor(
             resposta_id=resposta_q2_2.id,
             faceta_valor_id=valor_faceta_f1_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv18 = RespostaFacetaValor(
             resposta_id=resposta_q2_3.id,
             faceta_valor_id=valor_faceta_f1_3.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         db.add_all([rfv10, rfv11, rfv12, rfv13, rfv14, rfv15, rfv16, rfv17, rfv18])
         db.commit()
@@ -589,49 +589,49 @@ def create_initial_data(db: Session):
         rfv19 = RespostaFacetaValor(
             resposta_id=resposta_q3_1.id,
             faceta_valor_id=valor_faceta_f2_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv20 = RespostaFacetaValor(
             resposta_id=resposta_q3_2.id,
             faceta_valor_id=valor_faceta_f2_1.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv21 = RespostaFacetaValor(
             resposta_id=resposta_q3_3.id,
             faceta_valor_id=valor_faceta_f2_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
 
         rfv22 = RespostaFacetaValor(
             resposta_id=resposta_q3_1.id,
             faceta_valor_id=valor_faceta_f2_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv23 = RespostaFacetaValor(
             resposta_id=resposta_q3_2.id,
             faceta_valor_id=valor_faceta_f2_2.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv24 = RespostaFacetaValor(
             resposta_id=resposta_q3_3.id,
             faceta_valor_id=valor_faceta_f2_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
 
         rfv25 = RespostaFacetaValor(
             resposta_id=resposta_q3_1.id,
             faceta_valor_id=valor_faceta_f2_3.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv26 = RespostaFacetaValor(
             resposta_id=resposta_q3_2.id,
             faceta_valor_id=valor_faceta_f2_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv27 = RespostaFacetaValor(
             resposta_id=resposta_q3_3.id,
             faceta_valor_id=valor_faceta_f2_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         db.add_all([rfv19, rfv20, rfv21, rfv22, rfv23, rfv24, rfv25, rfv26, rfv27])
         db.commit()
@@ -641,34 +641,34 @@ def create_initial_data(db: Session):
         rfv28 = RespostaFacetaValor(
             resposta_id=resposta_q4_1.id,
             faceta_valor_id=valor_faceta_f10_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv29 = RespostaFacetaValor(
             resposta_id=resposta_q4_2.id,
             faceta_valor_id=valor_faceta_f10_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
 
         rfv30 = RespostaFacetaValor(
             resposta_id=resposta_q4_1.id,
             faceta_valor_id=valor_faceta_f10_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv31 = RespostaFacetaValor(
             resposta_id=resposta_q4_2.id,
             faceta_valor_id=valor_faceta_f10_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
 
         rfv32 = RespostaFacetaValor(
             resposta_id=resposta_q4_1.id,
             faceta_valor_id=valor_faceta_f10_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv33 = RespostaFacetaValor(
             resposta_id=resposta_q4_2.id,
             faceta_valor_id=valor_faceta_f10_3.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         db.add_all([rfv28, rfv29, rfv30, rfv31, rfv32, rfv33])
         db.commit()
@@ -678,49 +678,49 @@ def create_initial_data(db: Session):
         rfv34 = RespostaFacetaValor(
             resposta_id=resposta_q5_1.id,
             faceta_valor_id=valor_faceta_f5_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv35 = RespostaFacetaValor(
             resposta_id=resposta_q5_2.id,
             faceta_valor_id=valor_faceta_f5_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv36 = RespostaFacetaValor(
             resposta_id=resposta_q5_3.id,
             faceta_valor_id=valor_faceta_f5_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
 
         rfv37 = RespostaFacetaValor(
             resposta_id=resposta_q5_1.id,
             faceta_valor_id=valor_faceta_f5_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv38 = RespostaFacetaValor(
             resposta_id=resposta_q5_2.id,
             faceta_valor_id=valor_faceta_f5_2.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv39 = RespostaFacetaValor(
             resposta_id=resposta_q5_3.id,
             faceta_valor_id=valor_faceta_f5_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
 
         rfv40 = RespostaFacetaValor(
             resposta_id=resposta_q5_1.id,
             faceta_valor_id=valor_faceta_f5_3.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv41 = RespostaFacetaValor(
             resposta_id=resposta_q5_2.id,
             faceta_valor_id=valor_faceta_f5_3.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv42 = RespostaFacetaValor(
             resposta_id=resposta_q5_3.id,
             faceta_valor_id=valor_faceta_f5_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         db.add_all([rfv34, rfv35, rfv36, rfv37, rfv38, rfv39, rfv40, rfv41, rfv42])
         db.commit()
@@ -730,49 +730,49 @@ def create_initial_data(db: Session):
         rfv43 = RespostaFacetaValor(
             resposta_id=resposta_q6_1.id,
             faceta_valor_id=valor_faceta_f7_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv44 = RespostaFacetaValor(
             resposta_id=resposta_q6_2.id,
             faceta_valor_id=valor_faceta_f7_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv45 = RespostaFacetaValor(
             resposta_id=resposta_q6_3.id,
             faceta_valor_id=valor_faceta_f7_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
 
         rfv46 = RespostaFacetaValor(
             resposta_id=resposta_q6_1.id,
             faceta_valor_id=valor_faceta_f7_2.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv47 = RespostaFacetaValor(
             resposta_id=resposta_q6_2.id,
             faceta_valor_id=valor_faceta_f7_2.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv48 = RespostaFacetaValor(
             resposta_id=resposta_q6_3.id,
             faceta_valor_id=valor_faceta_f7_2.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
 
         rfv49 = RespostaFacetaValor(
             resposta_id=resposta_q6_1.id,
             faceta_valor_id=valor_faceta_f7_3.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv50 = RespostaFacetaValor(
             resposta_id=resposta_q6_2.id,
             faceta_valor_id=valor_faceta_f7_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv51 = RespostaFacetaValor(
             resposta_id=resposta_q6_3.id,
             faceta_valor_id=valor_faceta_f7_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         db.add_all([rfv43, rfv44, rfv45, rfv46, rfv47, rfv48, rfv49, rfv50, rfv51])
         db.commit()
@@ -782,49 +782,49 @@ def create_initial_data(db: Session):
         rfv52 = RespostaFacetaValor(
             resposta_id=resposta_q7_1.id,
             faceta_valor_id=valor_faceta_f11_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv53 = RespostaFacetaValor(
             resposta_id=resposta_q7_2.id,
             faceta_valor_id=valor_faceta_f11_1.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv54 = RespostaFacetaValor(
             resposta_id=resposta_q7_3.id,
             faceta_valor_id=valor_faceta_f11_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
 
         rfv55 = RespostaFacetaValor(
             resposta_id=resposta_q7_1.id,
             faceta_valor_id=valor_faceta_f11_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv56 = RespostaFacetaValor(
             resposta_id=resposta_q7_2.id,
             faceta_valor_id=valor_faceta_f11_2.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv57 = RespostaFacetaValor(
             resposta_id=resposta_q7_3.id,
             faceta_valor_id=valor_faceta_f11_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
 
         rfv58 = RespostaFacetaValor(
             resposta_id=resposta_q7_1.id,
             faceta_valor_id=valor_faceta_f11_3.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv59 = RespostaFacetaValor(
             resposta_id=resposta_q7_2.id,
             faceta_valor_id=valor_faceta_f11_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv60 = RespostaFacetaValor(
             resposta_id=resposta_q7_3.id,
             faceta_valor_id=valor_faceta_f11_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         db.add_all([rfv52, rfv53, rfv54, rfv55, rfv56, rfv57, rfv58, rfv59, rfv60])
         db.commit()
@@ -834,33 +834,33 @@ def create_initial_data(db: Session):
         rfv61 = RespostaFacetaValor(
             resposta_id=resposta_q8_1.id,
             faceta_valor_id=valor_faceta_f9_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv62 = RespostaFacetaValor(
             resposta_id=resposta_q8_2.id,
             faceta_valor_id=valor_faceta_f9_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv63 = RespostaFacetaValor(
             resposta_id=resposta_q8_3.id,
             faceta_valor_id=valor_faceta_f9_1.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
 
         rfv64 = RespostaFacetaValor(
             resposta_id=resposta_q8_1.id,
             faceta_valor_id=valor_faceta_f9_2.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv65 = RespostaFacetaValor(
             resposta_id=resposta_q8_2.id,
             faceta_valor_id=valor_faceta_f9_2.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv66 = RespostaFacetaValor(
             resposta_id=resposta_q8_3.id,
             faceta_valor_id=valor_faceta_f9_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         db.add_all([rfv61, rfv62, rfv63, rfv64, rfv65, rfv66])
         db.commit()
@@ -870,49 +870,49 @@ def create_initial_data(db: Session):
         rfv67 = RespostaFacetaValor(
             resposta_id=resposta_q9_1.id,
             faceta_valor_id=valor_faceta_f3_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv68 = RespostaFacetaValor(
             resposta_id=resposta_q9_2.id,
             faceta_valor_id=valor_faceta_f3_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv69 = RespostaFacetaValor(
             resposta_id=resposta_q9_3.id,
             faceta_valor_id=valor_faceta_f3_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
 
         rfv70 = RespostaFacetaValor(
             resposta_id=resposta_q9_1.id,
             faceta_valor_id=valor_faceta_f3_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv71 = RespostaFacetaValor(
             resposta_id=resposta_q9_2.id,
             faceta_valor_id=valor_faceta_f3_2.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv72 = RespostaFacetaValor(
             resposta_id=resposta_q9_3.id,
             faceta_valor_id=valor_faceta_f3_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
 
         rfv73 = RespostaFacetaValor(
             resposta_id=resposta_q9_1.id,
             faceta_valor_id=valor_faceta_f3_3.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv74 = RespostaFacetaValor(
             resposta_id=resposta_q9_2.id,
             faceta_valor_id=valor_faceta_f3_3.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv75 = RespostaFacetaValor(
             resposta_id=resposta_q9_3.id,
             faceta_valor_id=valor_faceta_f3_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         db.add_all([rfv67, rfv68, rfv69, rfv70, rfv71, rfv72, rfv73, rfv74, rfv75])
         db.commit()
@@ -922,49 +922,49 @@ def create_initial_data(db: Session):
         rfv76 = RespostaFacetaValor(
             resposta_id=resposta_q10_1.id,
             faceta_valor_id=valor_faceta_f4_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv77 = RespostaFacetaValor(
             resposta_id=resposta_q10_2.id,
             faceta_valor_id=valor_faceta_f4_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv78 = RespostaFacetaValor(
             resposta_id=resposta_q10_3.id,
             faceta_valor_id=valor_faceta_f4_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
 
         rfv79 = RespostaFacetaValor(
             resposta_id=resposta_q10_1.id,
             faceta_valor_id=valor_faceta_f4_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv80 = RespostaFacetaValor(
             resposta_id=resposta_q10_2.id,
             faceta_valor_id=valor_faceta_f4_2.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv81 = RespostaFacetaValor(
             resposta_id=resposta_q10_3.id,
             faceta_valor_id=valor_faceta_f4_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
 
         rfv82 = RespostaFacetaValor(
             resposta_id=resposta_q10_1.id,
             faceta_valor_id=valor_faceta_f4_3.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv83 = RespostaFacetaValor(
             resposta_id=resposta_q10_2.id,
             faceta_valor_id=valor_faceta_f4_3.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv84 = RespostaFacetaValor(
             resposta_id=resposta_q10_3.id,
             faceta_valor_id=valor_faceta_f4_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         db.add_all([rfv76, rfv77, rfv78, rfv79, rfv80, rfv81, rfv82, rfv83, rfv84])
         db.commit()
@@ -974,49 +974,49 @@ def create_initial_data(db: Session):
         rfv85 = RespostaFacetaValor(
             resposta_id=resposta_q11_1.id,
             faceta_valor_id=valor_faceta_f6_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv86 = RespostaFacetaValor(
             resposta_id=resposta_q11_2.id,
             faceta_valor_id=valor_faceta_f6_1.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         rfv87 = RespostaFacetaValor(
             resposta_id=resposta_q11_3.id,
             faceta_valor_id=valor_faceta_f6_1.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
 
         rfv88 = RespostaFacetaValor(
             resposta_id=resposta_q11_1.id,
             faceta_valor_id=valor_faceta_f6_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv89 = RespostaFacetaValor(
             resposta_id=resposta_q11_2.id,
             faceta_valor_id=valor_faceta_f6_2.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv90 = RespostaFacetaValor(
             resposta_id=resposta_q11_3.id,
             faceta_valor_id=valor_faceta_f6_2.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
 
         rfv91 = RespostaFacetaValor(
             resposta_id=resposta_q11_1.id,
             faceta_valor_id=valor_faceta_f6_3.id,
-            pontuacao=1
+            pontuacao=PONTUACAO_MAIOR
         )
         rfv92 = RespostaFacetaValor(
             resposta_id=resposta_q11_2.id,
             faceta_valor_id=valor_faceta_f6_3.id,
-            pontuacao=0.5
+            pontuacao=PONTUACAO_MEDIA
         )
         rfv93 = RespostaFacetaValor(
             resposta_id=resposta_q11_3.id,
             faceta_valor_id=valor_faceta_f6_3.id,
-            pontuacao=0
+            pontuacao=PONTUACAO_MENOR
         )
         db.add_all([rfv85, rfv86, rfv87, rfv88, rfv89, rfv90, rfv91, rfv92, rfv93])
         db.commit()

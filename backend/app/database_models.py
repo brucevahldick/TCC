@@ -3,6 +3,10 @@ from sqlalchemy.orm import relationship
 
 from .database import Base
 
+PONTUACAO_MENOR = 0
+PONTUACAO_MEDIA = 0.5
+PONTUACAO_MAIOR = 1
+
 
 class Faceta(Base):
     __tablename__ = "facetas"

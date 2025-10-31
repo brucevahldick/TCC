@@ -1,30 +1,19 @@
-$primary-color: #007bff;
-$secondary-color: #666;
+$primary-color: #2C2C2C;
+$secondary-color: #fff;
 $background-color: #f4f4f4;
-$card-background: #fff;
+$card-background: #f2f2f2;
+$border-radius: 0.2rem;
 $font-stack: sans-serif;
+
+html {
+  overflow-x: hidden;
+}
 
 body {
   font-family: $font-stack;
   margin: 0;
   padding: 0;
-  background-color: $background-color;
-}
-
-div {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: $card-background;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  // Exemplo de função SASS: escurece a cor primária
-  color: darken($primary-color, 20%);
-  border-bottom: 2px solid $primary-color;
-  padding-bottom: 10px;
+  color: $primary-color;
 }
 
 p {
@@ -34,4 +23,159 @@ p {
 strong {
   color: $primary-color;
   font-size: 1.2em;
+}
+
+.app-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: $background-color;
+}
+
+.conteudo {
+  width: 90%;
+  max-width: 1024px;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.menu-container {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 12rem;
+  text-align: center;
+  background-color: $background-color;
+
+  .menu {
+    display: flex;
+    justify-content: center;
+    background-color: $secondary-color;
+    padding: 2rem;
+    width: 100%;
+
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: block;
+        width: 14rem;
+        height: 3rem;
+        border: 1px solid $primary-color;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: $border-radius;
+        transition: 0.2s ease;
+
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          text-decoration: none;
+          color: $primary-color;
+          font-weight: 500;
+        }
+      }
+
+      li.ativo, li:hover {
+        background-color: $primary-color;
+
+        a {
+          color: $secondary-color
+        }
+      }
+    }
+  }
+}
+
+.questionario {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+
+  .questao-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 10rem;
+    width: 95%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: $border-radius;
+
+    .questao, .resposta-container {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .questao {
+      height: 15%;
+    }
+
+    .resposta-container {
+      height: 85%;
+      padding-left: 1rem;
+      justify-content: space-around;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+
+.form-questionario {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+
+
+  button:hover {
+    background-color: $primary-color;
+    color: $secondary-color;
+    cursor: pointer;
+
+    a {
+      color: $secondary-color;
+    }
+  }
+
+  button {
+    width: 14rem;
+    background-color: $background-color;
+    border: 1px solid $primary-color;
+    border-radius: $border-radius;
+    padding: 0.8rem;
+    text-align: center;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+      color: $primary-color;
+      font-weight: 500;
+    }
+  }
 }
