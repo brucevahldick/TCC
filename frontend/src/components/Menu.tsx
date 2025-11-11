@@ -1,29 +1,31 @@
-import {Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export function Menu() {
     const location = useLocation();
 
-    const tecnicasEspecificacao = "Técnicas de Especificação";
-    const questionario = "Questionário";
-    const guiaFacetado = "Guia Facetado";
+    const rotas = [
+        { path: "/", label: "Questionário" },
+        { path: "/recomendacoes", label: "Recomendações" },
+        { path: "/tecnicas-especificacao", label: "Técnicas de Especificação" },
+        { path: "/guia-facetado", label: "Guia Facetado" },
+    ];
+
+    const tituloAtual =
+        rotas.find((r) => r.path === location.pathname)?.label || "Questionário";
 
     const isActive = (path: string) =>
         location.pathname === path ? "ativo" : "";
 
     return (
         <div className="menu-container">
-            <h1>{questionario}</h1>
+            <h1>{tituloAtual}</h1>
             <nav className="menu">
                 <ul>
-                    <li className={isActive("/tecnicas-especificacao")}>
-                        <Link to="/tecnicas-especificacao">{tecnicasEspecificacao}</Link>
-                    </li>
-                    <li className={isActive("/")}>
-                        <Link to="/">{questionario}</Link>
-                    </li>
-                    <li className={isActive("/guia-facetado")}>
-                        <Link to="/guia-facetado">{guiaFacetado}</Link>
-                    </li>
+                    {rotas.map(({ path, label }) => (
+                        <li key={path} className={isActive(path)}>
+                            <Link to={path}>{label}</Link>
+                        </li>
+                    ))}
                 </ul>
             </nav>
         </div>

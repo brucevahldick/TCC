@@ -7,6 +7,40 @@ def get_questoes_e_respostas(db: Session):
     return db.query(Questao).all()
 
 
+def get_tecnicas_detalhadas(db: Session):
+    tecnicas = db.query(Tecnica).all()
+    result = []
+    for tecnica in tecnicas:
+        tecnica_data = {
+            "id": tecnica.id,
+            "codigo": tecnica.codigo,
+            "nome": tecnica.nome,
+            "facetas": [],
+        }
+        for tfv in tecnica.facetas_associadas:
+            faceta_valor = tfv.faceta_valor_ref
+            faceta = faceta_valor.faceta_ref
+
+            # Busca a pontuação da faceta para a técnica (se houver)
+            pontuacao = None
+            # A pontuação não está diretamente na TecnicaFacetaValor,
+            # mas sim na RespostaFacetaValor.
+            # Como este endpoint é para listar todas as técnicas e suas facetas,
+            # vamos apenas listar as facetas associadas.
+
+            tecnica_data["facetas"].append({
+                "codigo": faceta.codigo,
+                "nome": faceta.nome,
+                "definicao": faceta.definicao,
+                "valor_associado": {
+                    "valor": faceta_valor.valor,
+                    "pontuacao": None # Não aplicável neste contexto
+                }
+            })
+        result.append(tecnica_data)
+    return result
+
+
 def calcula_recomendacao(db: Session, resposta_ids: list[int]):
     query = (
         db.query(
