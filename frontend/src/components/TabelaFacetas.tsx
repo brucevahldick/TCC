@@ -55,8 +55,10 @@ export function TabelaFacetas({tecnicas, facetas}: TabelaFacetasProps) {
                             </Link>
                         </td>
                         {facetaCodigos.map(codigo => (
-                            <td key={codigo}>
-                                {tecnica.facetaValores[codigo] || "N/A"}
+                            <td title={tecnica.facetaValores[codigo]} key={codigo}>
+                                <Link title={tecnica.facetaValores[codigo]} to={`/guia-facetado#${codigo.toLowerCase()}`}>
+                                    {tecnica.facetaValores[codigo] || "N/A"}
+                                </Link>
                             </td>
                         ))}
                     </tr>
