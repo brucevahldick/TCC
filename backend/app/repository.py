@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import func, desc
-from .database_models import Tecnica, RespostaFacetaValor, FacetaValor, TecnicaFacetaValor, Questao
+from .database_models import Tecnica, RespostaFacetaValor, FacetaValor, TecnicaFacetaValor, Questao, Faceta
 
 
 def get_questoes_e_respostas(db: Session):
@@ -34,11 +34,52 @@ def get_tecnicas_detalhadas(db: Session):
                 "definicao": faceta.definicao,
                 "valor_associado": {
                     "valor": faceta_valor.valor,
-                    "pontuacao": None # Não aplicável neste contexto
+                    "pontuacao": None
                 }
             })
         result.append(tecnica_data)
     return result
+
+
+def get_guia_facetado_data(db: Session):
+    tecnicas_db = db.query(Tecnica).all()
+    tecnicas_data = []
+    for tecnica in tecnicas_db:
+        tecnica_data = {
+            "id": tecnica.id,
+            "codigo": tecnica.codigo,
+            "nome": tecnica.nome,
+            "facetas": [],
+        }
+        for tfv in tecnica.facetas_associadas:
+            faceta_valor = tfv.faceta_valor_ref
+            faceta = faceta_valor.faceta_ref
+
+            tecnica_data["facetas"].append({
+                "codigo": faceta.codigo,
+                "nome": faceta.nome,
+                "definicao": faceta.definicao,
+                "valor_associado": {
+                    "valor": faceta_valor.valor,
+                    "pontuacao": None
+                }
+            })
+        tecnicas_data.append(tecnica_data)
+
+    facetas_db = db.query(Faceta).all()
+    facetas_data = []
+    for faceta in facetas_db:
+        facetas_data.append({
+            "codigo": faceta.codigo,
+            "nome": faceta.nome,
+            "definicao": faceta.definicao,
+            "valores_possiveis": [fv.valor for fv in faceta.valores if fv.valor is not None]
+        })
+
+    return {
+        "tecnicas": tecnicas_data,
+        "facetas": facetas_data
+    }
 
 
 def calcula_recomendacao(db: Session, resposta_ids: list[int]):

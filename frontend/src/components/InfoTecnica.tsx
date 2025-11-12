@@ -1,5 +1,5 @@
 export function InfoTecnica({tecnica}) {
     return (
-        <h2>{tecnica.nome}</h2>
+        <h2>{tecnica.nome} ({tecnica.codigo})</h2>
     );
 }

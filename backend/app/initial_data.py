@@ -79,8 +79,8 @@ def create_initial_data(db: Session):
         valor_faceta_f7_3 = FacetaValor(faceta_id=faceta_f7.id, valor="Testes Automáticos")
 
         valor_faceta_f8_1 = FacetaValor(faceta_id=faceta_f8.id, valor="Geral")
-        valor_faceta_f8_2 = FacetaValor(faceta_id=faceta_f8.id, valor="Sistemas de negócio")
-        valor_faceta_f8_3 = FacetaValor(faceta_id=faceta_f8.id, valor="Sistemas em tempo real")
+        valor_faceta_f8_2 = FacetaValor(faceta_id=faceta_f8.id, valor="Negócio")
+        valor_faceta_f8_3 = FacetaValor(faceta_id=faceta_f8.id, valor="Tempo Real")
 
         valor_faceta_f9_1 = FacetaValor(faceta_id=faceta_f9.id, valor="Textual")
         valor_faceta_f9_2 = FacetaValor(faceta_id=faceta_f9.id, valor="Gráfica")
@@ -264,7 +264,7 @@ def create_initial_data(db: Session):
         tf8_9 = TecnicaFacetaValor(tecnica_id=tecnica_t8.id, faceta_valor_id=valor_faceta_f9_1.id)  # F9 (Textual)
         tf8_10 = TecnicaFacetaValor(tecnica_id=tecnica_t8.id, faceta_valor_id=valor_faceta_f10_3.id)  # F10 (Baixa)
         tf8_11 = TecnicaFacetaValor(tecnica_id=tecnica_t8.id, faceta_valor_id=valor_faceta_f11_3.id)  # F11 (Alta)
-        db.add_all([tf8_1, tf8_2, tf8_3, tf8_4, tf8_5, tf8_6, tf8_7, tf8_8, tf8_9, tf8_10, tf8_8])
+        db.add_all([tf8_1, tf8_2, tf8_3, tf8_4, tf8_5, tf8_6, tf8_7, tf8_8, tf8_9, tf8_10, tf8_11])
         db.commit()
 
         # T9 – SDL

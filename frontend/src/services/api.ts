@@ -13,16 +13,19 @@ export async function getTecnicasDetalhadas() {
     return res.json();
 }
 
+export async function getGuiaFacetadoData() {
+    const res = await fetch(`${apiUrl}/guia-facetado`);
+    if (!res.ok) throw new Error(`Erro ao buscar dados do guia facetado: ${res.status}`);
+    return res.json();
+}
 
 
 export async function postRespostas(respostas: number[]) {
     const res = await fetch(`${apiUrl}/recomendar`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ respostas }),
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({respostas}),
     });
     if (!res.ok) throw new Error(`Erro HTTP ${res.status}`);
     return res.json();
 }
-
-

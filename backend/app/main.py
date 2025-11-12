@@ -2,7 +2,8 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from . import database, repository
-from .api_models import QuestoesResult, QuestionarioRespondido, ListaTecnicas, ListaTecnicasDetalhada
+from .api_models import QuestoesResult, QuestionarioRespondido, ListaTecnicas, ListaTecnicasDetalhada, \
+    GuiaFacetadoResult
 
 app = FastAPI(title="FastAPI + PostgreSQL + React Project")
 origins = [
@@ -24,6 +25,7 @@ def questions(db: Session = Depends(database.get_db)):
     questoes = repository.get_questoes_e_respostas(db)
     return {"questoes": questoes}
 
+
 @app.get("/tecnicas", response_model=ListaTecnicasDetalhada)
 def tecnicas_detalhadas(db: Session = Depends(database.get_db)):
     tecnicas = repository.get_tecnicas_detalhadas(db)
@@ -34,3 +36,9 @@ def tecnicas_detalhadas(db: Session = Depends(database.get_db)):
 def recommend(request: QuestionarioRespondido, db: Session = Depends(database.get_db)):
     tecnicas = repository.calcula_recomendacao(db, request.respostas)
     return {"tecnicas": tecnicas}
+
+
+@app.get("/guia-facetado", response_model=GuiaFacetadoResult)
+def guia_facetado(db: Session = Depends(database.get_db)):
+    data = repository.get_guia_facetado_data(db)
+    return data

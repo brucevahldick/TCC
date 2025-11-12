@@ -5,6 +5,7 @@ import {Questionario} from "./components/Questionario";
 import {RecomendacoesPage} from "./components/RecomendacoesPage.tsx";
 import {TecnicasEspecificacao} from "./components/TecnicasEspecificacao.tsx";
 import {GuiaFacetado} from "./components/GuiaFacetado.tsx";
+import {ScrollToTopButton} from "./components/ScrollToTopButton.tsx";
 import {useRecomendacoesProvider, RecomendacoesContext} from "./hooks/useRecomendacoes.ts";
 import "./App.scss";
 
@@ -20,7 +21,7 @@ function RecomendacoesProvider({children}) {
 export default function App() {
     return (
         <Router>
-            <ScrollToTop />
+            <ScrollToTop/>
             <RecomendacoesProvider>
                 <div className="app-container">
                     <Menu/>
@@ -32,6 +33,7 @@ export default function App() {
                             <Route path="/recomendacoes" element={<RecomendacoesPage/>}/>
                         </Routes>
                     </div>
+                    <ScrollToTopButton/>
                 </div>
             </RecomendacoesProvider>
         </Router>
