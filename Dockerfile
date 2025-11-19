@@ -35,7 +35,7 @@ COPY TCC/backend/app ./app
 COPY --from=frontend /frontend/dist ./static
 
 # Dar permissão ao start.sh
-COPY TCC/backend/start.sh .
+COPY ./backend/start.sh .
 RUN chmod +x start.sh
 
 # Porta exposta
