@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getTecnicas} from "../services/api";
+import {getTecnicasDetalhadas} from "../services/api";
 
 let tecnicasCache = [];
 
@@ -13,7 +13,7 @@ export function useTecnicas() {
             return;
         }
 
-        getTecnicas()
+        getTecnicasDetalhadas()
             .then((data) => {
                 tecnicasCache = data.questoes || [];
                 setTecnicas(tecnicasCache);
