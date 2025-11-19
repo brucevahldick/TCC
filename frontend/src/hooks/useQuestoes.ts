@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {getQuestoes} from "../services/api";
 
-let questoesCache = [];
+let questoesCache: any[] = [];
 
 export function useQuestoes() {
-    const [questoes, setQuestoes] = useState([]);
+    const [questoes, setQuestoes] = useState<any[]>([]);
     const [erro, setErro] = useState<string | null>(null);
 
     // Estado para armazenar as respostas selecionadas

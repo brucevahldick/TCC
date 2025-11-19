@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {getTecnicasDetalhadas} from "../services/api";
 
-let tecnicasCache = [];
+let tecnicasCache: any[] = [];
 
 export function useTecnicas() {
-    const [tecnicas, setTecnicas] = useState([]);
+    const [tecnicas, setTecnicas] = useState<any[]>([]);
     const [erro, setErro] = useState<string | null>(null);
 
     useEffect(() => {
