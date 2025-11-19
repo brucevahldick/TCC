@@ -5,10 +5,10 @@ FROM node:20-alpine AS frontend
 
 WORKDIR /frontend
 
-COPY TCC/frontend/package*.json ./
+COPY ./frontend/package*.json ./
 RUN npm install
 
-COPY TCC/frontend .
+COPY ./frontend .
 RUN npm run build
 
 
@@ -29,7 +29,7 @@ COPY TCC/backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar código do backend
-COPY TCC/backend/app ./app
+COPY ./backend/app ./app
 
 # Copiar build do frontend para dentro do backend
 COPY --from=frontend /frontend/dist ./static
