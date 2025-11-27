@@ -120,7 +120,7 @@ def create_initial_data(db: Session):
         tecnica_t9 = Tecnica(codigo="T9", nome="The Specification and Description Language (SDL)")
         tecnica_t10 = Tecnica(codigo="T10", nome="PAISLey")
         tecnica_t11 = Tecnica(codigo="T11", nome="Petri-nets")
-        tecnica_t12 = Tecnica(codigo="T12", nome="UML")
+        tecnica_t12 = Tecnica(codigo="T12", nome="Unified Modeling Language (UML)")
         tecnica_t13 = Tecnica(codigo="T13", nome="Business Process Model and Notation (BPMN)")
         tecnica_t14 = Tecnica(codigo="T14", nome="Event-drive Process Chains (EPC)")
         tecnica_t15 = Tecnica(codigo="T15", nome="User Stories")
@@ -375,12 +375,12 @@ def create_initial_data(db: Session):
         # 5. QUESTÕES
         questao1 = Questao(codigo="Q1", conteudo="Que tipo de sistema você está especificando?")
         questao2 = Questao(codigo="Q2",
-                           conteudo="Você precisa evitar interpretações diferentes dos requisitos (ambiguidade)?")
+                           conteudo="Em qual nível de rigor e formalidade os requisitos precisam ser especificados?")
         questao3 = Questao(codigo="Q3",
-                           conteudo="Os usuários ou clientes que vão validar os requisitos têm perfil técnico?")
+                           conteudo="Os usuários ou clientes que vão validar o  artefato de requisitos possuem conhecimento técnico na área de computação?")
         questao4 = Questao(codigo="Q4", conteudo="O projeto vai usar práticas ágeis (como Scrum, Kanban, XP)?")
         questao5 = Questao(codigo="Q5",
-                           conteudo="O sistema precisa reagir a eventos externos ou tempo real (por exemplo, sensores, chamadas, mensagens)?")
+                           conteudo="O sistema precisa reagir a eventos externos ou tempo real?")
         questao6 = Questao(codigo="Q6",
                            conteudo="Você pretende usar ferramentas que gerem automaticamente diagramas, protótipos ou testes?")
         questao7 = Questao(codigo="Q7",
@@ -390,7 +390,7 @@ def create_initial_data(db: Session):
         questao9 = Questao(codigo="Q9",
                            conteudo="Você quer que a especificação sirva de base direta para desenvolvimento e testes?")
         questao10 = Questao(codigo="Q10",
-                            conteudo="Quão importante é garantir automaticamente que os requisitos estejam consistentes ou sem erros?")
+                            conteudo="O quão importante é que a técnica seja capaz de verificar automaticamente os requisitos?")
         questao11 = Questao(codigo="Q11",
                             conteudo="Você quer que a técnica ajude a organizar os requisitos (por exemplo, em níveis ou seções bem definidos)?")
 
@@ -410,9 +410,9 @@ def create_initial_data(db: Session):
         db.commit()
 
         # QUESTÃO 2
-        resposta_q2_1 = Resposta(questao_id=questao2.id, conteudo="Sim, totalmente")
+        resposta_q2_1 = Resposta(questao_id=questao2.id, conteudo="Totalmente")
         resposta_q2_2 = Resposta(questao_id=questao2.id, conteudo="Parcialmente")
-        resposta_q2_3 = Resposta(questao_id=questao2.id, conteudo="Não, o suficiente é entender a ideia geral")
+        resposta_q2_3 = Resposta(questao_id=questao2.id, conteudo="O suficiente é entender a ideia geral")
         db.add_all([resposta_q2_1, resposta_q2_2, resposta_q2_3])
         db.commit()
 

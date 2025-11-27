@@ -1,4 +1,3 @@
-import React from "react";
 import {Faceta} from "./Faceta.tsx";
 
 interface FacetaGuia {

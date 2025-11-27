@@ -9,12 +9,12 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
-export function GraficoRecomendacoes({tecnicas}) {
+export function GraficoRecomendacoes({tecnicas}: { tecnicas: any }) {
     return (
         <div className="grafico-tecnicas" style={{}}>
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart
-                    data={tecnicas.map((t) => ({
+                    data={tecnicas.map((t: any) => ({
                         name: t.codigo,
                         Pontuação: parseFloat((t.pontuacao ?? 0).toFixed(2)),
                     }))}

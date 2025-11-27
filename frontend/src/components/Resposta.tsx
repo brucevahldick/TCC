@@ -1,4 +1,10 @@
-export function Resposta({ resposta, checked, onSelect }) {
+type RespostaProsps = {
+    resposta: any;
+    checked: boolean;
+    onSelect: () => void;
+};
+
+export function Resposta({resposta, checked, onSelect}: RespostaProsps) {
     return (
         <label className="resposta">
             <input

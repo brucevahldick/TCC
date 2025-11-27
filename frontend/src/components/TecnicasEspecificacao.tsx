@@ -15,7 +15,7 @@ interface FacetaDetalhe {
     valor_associado: FacetaValorDetalhe;
 }
 
-interface TecnicaDetalhada {
+export interface TecnicaDetalhada {
     id: number;
     codigo: string;
     nome: string;
